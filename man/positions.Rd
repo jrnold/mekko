@@ -15,4 +15,3 @@ A numeric vector of bar positions.
 \description{
 Calculate positions from widths.
 }
-

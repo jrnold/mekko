@@ -17,17 +17,7 @@ positions <- function(width) {
 #' @param values A boolean indicating whether to show value labels in bars
 #' @return A bar mekko constructed with ggplot2.
 #' @export
-#' @examples
-#' library(ggplot2)
-#' df <- data.frame(
-#'   region = c('Northeast', 'Southeast', 'Central', 'West'),
-#'   sales = c(1200, 800, 450, 900),
-#'   avg_margin = c(3.2, -1.4, 0.1, 2.1)
-#'   )
-#' barmekko(df, region, avg_margin, sales)
-#' barmekko(df, region, avg_margin, sales) + labs(title = 'Margins by Region')
-#' barmekko(df[order(-df$sales),], region, avg_margin, sales)
-#' barmekko(df[order(-df$avg_margin),], region, avg_margin, sales)
+#' @example examples/barmekko.R
 barmekko <- function(data, x, y, width, values = FALSE) {
   df <- data
   xlabel <- as.character(substitute(x))
@@ -51,3 +41,4 @@ barmekko <- function(data, x, y, width, values = FALSE) {
     p
   }
 }
+
