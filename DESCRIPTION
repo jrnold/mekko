@@ -10,8 +10,11 @@ Description: Create variable width bar charts i.e.
     "bar mekko" charts to include important quantitative context.
     Closely related to mosaic, spine (or spinogram), matrix,
     submarine, olympic, Mondrian or product plots and tree maps.
+Depends:
+    R (>= 3.1)
 Imports:
-    ggplot2 (>= 2.0.0)
+    ggplot2 (>= 2.0.0),
+    rlang
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

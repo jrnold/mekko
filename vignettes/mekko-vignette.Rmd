@@ -50,6 +50,19 @@ profits <- data.frame(
   )
 ```
 
+```{r}
+library("dplyr")
+ggplot(arrange(profits, desc(revenue))) +
+  geom_barmekko(aes(x = revenue, y = profit_margin, 
+                    fill = product))
+```
+
+```{r}
+
+```
+
+
+
 ### Bar mekko
 
 Now let's take a look at profit margin by product using ggplot2.
