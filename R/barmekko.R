@@ -1,7 +1,4 @@
-#' Calculate positions from widths.
-#'
-#' @param width A numeric vector of bar widths.
-#' @return A numeric vector of bar positions.
+# this shouldn't be exposed
 positions <- function(width) {
   0.5 * (cumsum(width) + cumsum(c(0, width[-length(width)])))
 }
@@ -18,27 +15,20 @@ positions <- function(width) {
 #' @return A bar mekko constructed with ggplot2.
 #' @export
 #' @example examples/barmekko.R
-barmekko <- function(data, x, y, width, values = FALSE) {
-  df <- data
-  xlabel <- as.character(substitute(x))
-  ylabel <- as.character(substitute(y))
-  x <- as.character(eval(substitute(x), df))
-  y <- eval(substitute(y), df)
-  width <- eval(substitute(width), df)
-  pos <- positions(width)
-  p <- suppressWarnings(
-    ggplot2::ggplot() +
-    ggplot2::geom_bar(ggplot2::aes(x = pos, width = width, y = y, fill = x),
-      stat = "identity") +
-    ggplot2::scale_x_continuous(labels = x, breaks = pos) +
-    ggplot2::xlab(xlabel) +
-    ggplot2::ylab(ylabel) +
-    ggplot2::guides(fill = ggplot2::guide_legend(title = xlabel))
-  )
-  if(values) {
-    p + ggplot2::geom_text(ggplot2::aes(x = pos, y = 0, label = y, vjust = -0.5))
+#' @importFrom ggplot2 ggplot geom_col aes
+#' @importFrom rlang enquo UQ eval_tidy
+barmekko <- function(data, x, y, width = 1, values = FALSE, fill = TRUE) {
+  x <- enquo(x)
+  y <- enquo(y)
+  width <- enquo(width)
+  if (fill) {
+    fill <- x
   } else {
-    p
+    fill <- quo(NULL)
   }
+  pos <- eval_tidy(quo(positions(UQ(width))), data = data)
+  xlab <- eval_tidy(x, data = data)
+  ggplot(data) +
+    geom_barmekko(aes(x = UQ(width), y = UQ(y), fill = UQ(fill))) +
+    scale_x_discrete(labels = xlab, breaks = pos)
 }
-

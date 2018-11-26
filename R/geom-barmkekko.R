@@ -38,8 +38,8 @@ ggplot2::ggproto("GeomBarMekko", GeomRect,
    # limits, not just those for which x and y are outside the limits
    non_missing_aes = c("xmin", "xmax", "ymin", "ymax"),
 
+
    setup_data = function(data, params) {
-     browser()
      data$x <- data$x %||% params$x
 
      xboundaries <- cumsum(c(0, data$x))

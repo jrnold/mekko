@@ -4,7 +4,7 @@
 \alias{barmekko}
 \title{Create a bar mekko plot.}
 \usage{
-barmekko(data, x, y, width, values = FALSE)
+barmekko(data, x, y, width = 1, values = FALSE, fill = TRUE)
 }
 \arguments{
 \item{data}{A data frame.}

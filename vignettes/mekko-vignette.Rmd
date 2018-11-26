@@ -50,6 +50,8 @@ profits <- data.frame(
   )
 ```
 
+## The bar mekko geom
+
 ```{r}
 library("dplyr")
 ggplot(arrange(profits, desc(revenue))) +
@@ -57,19 +59,13 @@ ggplot(arrange(profits, desc(revenue))) +
                     fill = product))
 ```
 
-```{r}
-
-```
-
-
-
 ### Bar mekko
 
 Now let's take a look at profit margin by product using ggplot2.
 
 ```{r current-state-bad-example-bar-mekko}
 ggplot(profits, aes(x = product, y = profit_margin)) +
-  geom_bar(stat = "identity")
+  geom_col()
 ```
 
 Well that's insightful, but I don't know how worried I should be about the
@@ -79,7 +75,7 @@ what's important here?
 
 ```{r ggplot-bar-width-fail}
 ggplot(profits, aes(x = product, y = profit_margin, width = revenue)) +
-  geom_bar(stat = "identity") +
+  geom_col() +
   labs(title = "Variable bar width fail :(")
 ```
 
